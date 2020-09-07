@@ -1,5 +1,7 @@
 # casino
 
+赌场(基金)项目
+
 ## Project setup
 ```
 yarn install
