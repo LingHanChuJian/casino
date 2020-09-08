@@ -1,10 +1,12 @@
 'use strict'
 
+import path from 'path'
 import { fund } from '@/api'
 import { ActionDetails } from '@/types/commponents'
 import { dbHas, read, update, remove } from '@/utils'
 import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
+
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -16,6 +18,8 @@ const createWindow = (): void => {
   win = new BrowserWindow({
     width: 960,
     height: 720,
+    // @ts-ignore
+    icon: path.join(__static, 'icon.ico'),
     webPreferences: {
       nodeIntegration: true,
     },
