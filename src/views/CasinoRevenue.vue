@@ -82,16 +82,6 @@ export default class CasinoRevenue extends Vue {
             align: 'center',
             children: [
                 {
-                    key: 'holdingIncome',
-                    title: '持有收益额',
-                    align: 'center',
-                    render: (h: CreateElement, params: TableColumnRenderParams) => {
-                        const casinoRevenueData: CasinoRevenueParams = (params!.row as CasinoRevenueParams)
-                        const holdingIncome: number = (casinoRevenueData.netWorth! - casinoRevenueData.cost!) * casinoRevenueData.share!
-                        return h('span', `${Math.round(holdingIncome * 100) / 100}`)
-                    },
-                },
-                {
                     key: 'holdingIncomeRate',
                     title: '持有收益率(%)',
                     align: 'center',
@@ -99,13 +89,27 @@ export default class CasinoRevenue extends Vue {
                         const casinoRevenueData: CasinoRevenueParams = (params!.row as CasinoRevenueParams)
                         const amount: number = casinoRevenueData.cost! * casinoRevenueData.share!
                         const holdingIncome: number = (casinoRevenueData.netWorth! - casinoRevenueData.cost!) * casinoRevenueData.share!
-                        return h('span', `${Math.round(holdingIncome / amount * 1000) / 10}`)
+                        return h('span', { style: { color: holdingIncome < 0 ? '#008000' : '#FF0000' } }, `${Math.round(holdingIncome / amount * 1000) / 10}`)
+                    },
+                },
+                {
+                    key: 'holdingIncome',
+                    title: '持有收益额',
+                    align: 'center',
+                    render: (h: CreateElement, params: TableColumnRenderParams) => {
+                        const casinoRevenueData: CasinoRevenueParams = (params!.row as CasinoRevenueParams)
+                        const holdingIncome: number = (casinoRevenueData.netWorth! - casinoRevenueData.cost!) * casinoRevenueData.share!
+                        return h('span', { style: { color: holdingIncome < 0 ? '#008000' : '#FF0000' } }, `${Math.round(holdingIncome * 100) / 100}`)
                     },
                 },
                 {
                     key: 'expectGrowth',
                     title: '今日涨幅(%)',
                     align: 'center',
+                    render: (h: CreateElement, params: TableColumnRenderParams) => {
+                        const casinoRevenueData: CasinoRevenueParams = (params!.row as CasinoRevenueParams)
+                        return h('span', { style: { color: Number(casinoRevenueData.expectGrowth) < 0 ? '#008000' : '#FF0000' } }, casinoRevenueData.expectGrowth)
+                    },
                 },
                 {
                     key: 'income',
@@ -116,7 +120,7 @@ export default class CasinoRevenue extends Vue {
                         const amount: number = casinoRevenueData.cost! * casinoRevenueData.share!
                         const estimateAmount: number = Math.round(amount * 100) / 100
                         const income: number = estimateAmount * Number(casinoRevenueData.expectGrowth!) / 100
-                        return h('span', `${Math.round(income * 100) / 100}`)
+                        return h('span', { style: { color: income < 0 ? '#008000' : '#FF0000' } }, `${Math.round(income * 100) / 100}`)
                     },
                 },
                 {
@@ -127,8 +131,6 @@ export default class CasinoRevenue extends Vue {
             ],
         },
     ]
-
-    private tableData: CasinoRevenueParams[] = []
 
     private handleSummary(summaryMethodParams: SummaryMethodCasinoRevenueParams): BaseData {
         const sums: BaseData = {}
@@ -193,6 +195,14 @@ export default class CasinoRevenue extends Vue {
 
     private get isDefiniteTime(): boolean {
         return this.$store.state.casinoRevenue.isDefiniteTime
+    }
+
+    private set tableData(value: CasinoRevenueParams[]) {
+        this.$store.dispatch('setTableData', value)
+    }
+
+    private get tableData(): CasinoRevenueParams[] {
+        return this.$store.state.casinoRevenue.tableData
     }
 }
 </script>

@@ -24,6 +24,7 @@ export interface CasinoRevenueParams {
 
 export interface CasinoRevenueData {
     isDefiniteTime: boolean
+    tableData: CasinoRevenueParams[]
 }
 
 export interface SummaryMethodCasinoRevenueParams {
