@@ -10,6 +10,7 @@ module.exports = {
         electronBuilder: {
             nodeIntegration: true,
             builderOptions: {
+                publish: ['github'],
                 productName: 'casino',
                 appId: 'com.electron.casino',
                 win: {

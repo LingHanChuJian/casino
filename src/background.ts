@@ -2,11 +2,11 @@
 
 import path from 'path'
 import { fund } from '@/api'
+import { autoUpdater } from 'electron-updater'
 import { ActionDetails } from '@/types/commponents'
 import { dbHas, read, update, remove } from '@/utils'
 import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -33,6 +33,7 @@ const createWindow = (): void => {
   } else {
     createProtocol('app')
     win.loadURL('app://./index.html')
+    autoUpdater.checkForUpdatesAndNotify()
   }
 
   win.on('closed', () => {
