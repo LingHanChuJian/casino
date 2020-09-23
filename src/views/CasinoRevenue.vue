@@ -108,7 +108,7 @@ export default class CasinoRevenue extends Vue {
                     align: 'center',
                     render: (h: CreateElement, params: TableColumnRenderParams) => {
                         const casinoRevenueData: CasinoRevenueParams = (params!.row as CasinoRevenueParams)
-                        return h('span', { style: { color: Number(casinoRevenueData.expectGrowth) < 0 ? '#008000' : '#FF0000' } }, casinoRevenueData.expectGrowth)
+                        return h('span', { style: { color: casinoRevenueData.expectGrowth && Number(casinoRevenueData.expectGrowth) < 0 ? '#008000' : '#FF0000' } }, casinoRevenueData.expectGrowth || '暂无')
                     },
                 },
                 {
@@ -120,7 +120,7 @@ export default class CasinoRevenue extends Vue {
                         const amount: number = casinoRevenueData.cost! * casinoRevenueData.share!
                         const estimateAmount: number = Math.round(amount * 100) / 100
                         const income: number = estimateAmount * Number(casinoRevenueData.expectGrowth!) / 100
-                        return h('span', { style: { color: income < 0 ? '#008000' : '#FF0000' } }, `${Math.round(income * 100) / 100}`)
+                        return h('span', { style: { color: casinoRevenueData.expectGrowth && income < 0 ? '#008000' : '#FF0000' } }, casinoRevenueData.expectGrowth ? `${Math.round(income * 100) / 100}` : '暂无')
                     },
                 },
                 {
@@ -157,7 +157,7 @@ export default class CasinoRevenue extends Vue {
                             const amount: number = item.cost! * item.share!
                             const estimateAmount: number = Math.round(amount * 100) / 100
                             const income: number = estimateAmount * Number(item.expectGrowth!) / 100
-                            return Math.round((total + income) * 100) / 100
+                            return Math.round((total + (item.expectGrowth ? income : 0)) * 100) / 100
                         }, 0),
                     }
                     break
