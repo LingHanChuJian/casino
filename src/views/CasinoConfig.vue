@@ -111,6 +111,7 @@ export default class CasinoConfig extends Mixins(EmitterMixins) {
                                         ipcRenderer.invoke('casino', Object.assign({ type: 'casino-config', action: 'remove' }, casinoConfigData))
                                             .then((result: ActionDetails) => {
                                                 this.$Message.success(result.message)
+                                                this.resetReadDBTableData()
                                             })
                                     },
                                     onCancel: () => { this.$Message.success('已取消删除') },

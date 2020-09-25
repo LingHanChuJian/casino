@@ -32,7 +32,7 @@ export const update = (name: string, newData: DBData): void => {
 
 export const remove = (name: string, newData: DBData): void => {
     if (dbHas(name, { id: newData.id })) {
-        (db.get(name) as any).remove({ id: newData.id })
+        (db.get(name) as any).remove({ id: newData.id }).write()
     }
 }
 
