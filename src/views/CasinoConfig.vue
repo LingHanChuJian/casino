@@ -27,6 +27,7 @@ import CasinoConfigModel from '@/components/CasinoConfigModel.vue'
 
 
 @Component({
+    name: 'CasinoConfig',
     components: {
         Button,
         CasinoTable,

@@ -17,6 +17,7 @@ import { Layout, Sider, Header, Content, Footer } from 'view-design'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
+    name: 'Index',
     components: {
         Layout,
         Sider,

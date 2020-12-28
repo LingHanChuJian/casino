@@ -20,6 +20,7 @@ import { Component, Prop, Watch, Mixins, Vue } from 'vue-property-decorator'
 
 
 @Component({
+    name: 'CasinoConfigModel',
     components: {
         Modal,
         Form,

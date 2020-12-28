@@ -1,5 +1,5 @@
 <template lang="pug">
-    SubMenu(
+    Submenu(
         v-if="menuItemData.children"
         :name="menuItemData.name"
         :class="[menuItemData.className ? prefixCls + '-' + menuItemData.className : '']"
@@ -33,6 +33,7 @@ import { MenuItemData } from '@/types/commponents'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component({
+    name: 'Nav',
     components: {
         Submenu,
         MenuItem,

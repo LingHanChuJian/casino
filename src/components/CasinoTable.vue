@@ -28,6 +28,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { SummaryMethodOptions, BaseSummaryMethod } from '@/types/commponents'
 
 @Component({
+    name: 'CasinoTable',
     components: {
         Table,
         Page,

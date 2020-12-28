@@ -23,6 +23,7 @@ import { BaseData, CasinoRevenueParams, SummaryMethodCasinoRevenueParams } from 
 
 
 @Component({
+    name: 'CasinoRevenue',
     components: {
         Button,
         CasinoTable,

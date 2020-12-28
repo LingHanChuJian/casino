@@ -6,7 +6,7 @@
             Menu(mode="vertical" theme="light" :active-name="activeName")
                 Nav(v-for="item, index in menuData" :key="index" :menuItemData="item")
         div(:class="[prefixCls + '-footer']")
-            p &copy; 2019 · 凌寒初见
+            p &copy; {{ new Date().getFullYear() }} · 凌寒初见
 </template>
 
 <script lang="ts">
@@ -14,8 +14,10 @@ import { Menu } from 'view-design'
 import Nav from '@/components/Nav.vue'
 import { MenuItemData } from '@/types/commponents'
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import { realpathSync } from 'fs'
 
 @Component({
+    name: 'NavDrawer',
     components: {
         Menu,
         Nav,
@@ -36,6 +38,7 @@ export default class NavDrawer extends Vue {
     private get activeName(): string {
         return this.$route.name || 'casino-config'
     }
+
 }
 </script>
 

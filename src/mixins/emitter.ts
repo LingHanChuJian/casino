@@ -11,7 +11,9 @@ function broadcast(this: Vue, componentName: string, eventName: string, params: 
     })
 }
 
-@Component
+@Component({
+    name: 'EmitterMixins',
+})
 export default class EmitterMixins extends Vue {
     /**
      *  向上查找指定Vue元素, 派发自定义事件
